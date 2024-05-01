@@ -16,7 +16,7 @@ class CurrentWeatherRemoteDataSource {
     String apikey = dotenv.get('WeatherApiKey');
 
     return await _baseApi.get(
-      "/current.json?key=$apikey&q=$location&aqi=no",
+      "/forecast.json?key=$apikey&q=$location&aqi=no",
     );
   }
 }
