@@ -31,7 +31,6 @@ class _InputActionCardWidgetState extends State<InputActionCardWidget> {
                 blurRadius: 2)
           ]),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
         children: [
           Text(
             "Enter the name of a place to get current weather conditions.",
