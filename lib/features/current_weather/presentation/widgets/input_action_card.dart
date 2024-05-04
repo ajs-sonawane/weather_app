@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/features/current_weather/presentation/screens/weather_details_screen.dart';
+import 'package:weather_app/shared/widgets/app_button.dart';
 import 'package:weather_app/utils/app_bottomsheets.dart';
 import 'package:weather_app/utils/helpers.dart';
 import 'package:weather_app/utils/size.dart';
@@ -25,11 +26,12 @@ class _InputActionCardWidgetState extends State<InputActionCardWidget> {
           boxShadow: const [
             BoxShadow(
                 color: Colors.grey,
-                offset: Offset(4, 4),
+                offset: Offset(2, 2),
                 spreadRadius: 1,
-                blurRadius: 9)
+                blurRadius: 2)
           ]),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Text(
             "Enter the name of a place to get current weather conditions.",
@@ -69,33 +71,18 @@ class _InputActionCardWidgetState extends State<InputActionCardWidget> {
             ),
           ),
           SizedBox(height: appSize(context: context, unit: 1) / 13),
-          Row(
-            children: [
-              Expanded(
-                child: ElevatedButton(
-                    style: ButtonStyle(
-                        padding: MaterialStateProperty.resolveWith((states) =>
-                            const EdgeInsets.symmetric(
-                                horizontal: 22, vertical: 14)),
-                        backgroundColor: MaterialStateProperty.resolveWith(
-                            (states) => Color(Colors.black.value))),
-                    onPressed: () {
-                      if (searchController.text.isNotEmpty) {
-                        Navigator.of(context).push(goToRoute(
-                            WeatherDetailsScreen(
-                                location: searchController.text)));
-                      } else {
-                        AppBottomSheets.showSnackBar(
-                            context, "Please enter city name.");
-                      }
-                    },
-                    child: const Text(
-                      "Get Weather Conditions",
-                      style: TextStyle(color: Colors.white),
-                    )),
-              ),
-              SizedBox(height: appSize(context: context, unit: 1) / 3),
-            ],
+          AppButton(
+            title: "Get Weather Conditions",
+            color: Colors.brown,
+            onPressed: () {
+              if (searchController.text.isNotEmpty) {
+                Navigator.of(context).push(goToRoute(
+                    WeatherDetailsScreen(location: searchController.text)));
+              } else {
+                AppBottomSheets.showSnackBar(
+                    context, "Please enter city name.");
+              }
+            },
           )
         ],
       ),

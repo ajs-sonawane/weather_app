@@ -1,6 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:weather_app/features/current_weather/presentation/widgets/input_action_card.dart';
 import 'package:weather_app/features/current_weather/presentation/widgets/logo_widget.dart';
+import 'package:weather_app/utils/const.dart';
 import 'package:weather_app/utils/size.dart';
 
 class LocationScreen extends StatefulWidget {
@@ -17,17 +20,37 @@ class _LocationScreenState extends State<LocationScreen> {
       resizeToAvoidBottomInset: true,
       body: SafeArea(
         maintainBottomViewPadding: true,
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              SizedBox(height: appSize(context: context, unit: 1) / 3),
-              const LogoWidget(),
-              SizedBox(height: appSize(context: context, unit: 1) / 2),
-              const InputActionCardWidget(),
-              SizedBox(height: appSize(context: context, unit: 1) / 3),
-            ],
-          ),
-        ),
+        child: OrientationBuilder(builder: (context, orientation) {
+          if (orientation == Orientation.landscape) {
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(height: appSize(context: context, unit: 2) / 2),
+                  Row(
+                    children: [
+                      SizedBox(width: appSize(context: context, unit: 2) / 3),
+                      const LogoWidget(),
+                      SizedBox(width: appSize(context: context, unit: 2) / 10),
+                      Expanded(child: const InputActionCardWidget()),
+                      SizedBox(width: appSize(context: context, unit: 2) / 3),
+                    ],
+                  ),
+                ],
+              ),
+            );
+          }
+          return SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(height: appSize(context: context, unit: 5) / 3),
+                const LogoWidget(),
+                SizedBox(height: appSize(context: context, unit: 15) / 2),
+                const InputActionCardWidget(),
+                SizedBox(height: appSize(context: context, unit: 1) / 3),
+              ],
+            ),
+          );
+        }),
       ),
     );
   }

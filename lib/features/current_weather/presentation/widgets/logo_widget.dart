@@ -8,8 +8,8 @@ class LogoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: appSize(context: context, unit: 22),
-      width: appSize(context: context, unit: 22),
+      height: appSize(context: context, unit: 14),
+      width: appSize(context: context, unit: 14),
       alignment: Alignment.center,
       decoration: const BoxDecoration(
           shape: BoxShape.circle,
@@ -23,13 +23,13 @@ class LogoWidget extends StatelessWidget {
             style: TextStyle(
                 color: Colors.brown,
                 height: 1,
-                fontSize: appSize(context: context, unit: 1) / 3,
+                fontSize: appSize(context: context, unit: 1) / 4,
                 fontWeight: FontWeight.bold),
           ),
           Text("Stay updated with current weather conditions.",
               style: TextStyle(
                   color: Colors.black54,
-                  fontSize: appSize(context: context, unit: 1) / 10)),
+                  fontSize: appSize(context: context, unit: 1) / 12)),
         ],
       ),
     );

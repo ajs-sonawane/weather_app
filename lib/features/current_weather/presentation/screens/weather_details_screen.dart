@@ -4,7 +4,11 @@ import 'package:weather_app/features/current_weather/presentation/bloc/cw_blocs.
 import 'package:weather_app/features/current_weather/presentation/bloc/cw_events.dart';
 import 'package:weather_app/features/current_weather/presentation/bloc/cw_states.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:weather_app/shared/res/styles.dart';
+import 'package:weather_app/shared/widgets/app_alert_widget.dart';
+import 'package:weather_app/shared/widgets/app_button.dart';
 import 'package:weather_app/utils/const.dart';
+import 'package:weather_app/utils/size.dart';
 
 class WeatherDetailsScreen extends StatefulWidget {
   const WeatherDetailsScreen({super.key, required this.location});
@@ -30,7 +34,11 @@ class _WeatherDetailsScreenState extends State<WeatherDetailsScreen> {
         maintainBottomViewPadding: true,
         child: Stack(
           children: [
-
+            Row(
+              children: [
+                Expanded(child: Image.asset(kSnowImg,fit: BoxFit.fill)),
+              ],
+            ),
             BlocConsumer<CurrentWeatherBloc, CurrentWeatherState>(
               listener: (context, state) {},
               builder: (context, state) {
@@ -74,7 +82,16 @@ class _WeatherDetailsScreenState extends State<WeatherDetailsScreen> {
                   );
                 }
                 if (state.status == CurrentWeatherStatus.failure) {
-                  return Center(child: Text("Error: ${state.message}"));
+                  return AppAlertWidget(
+                      title: "Something went wrong",
+                      subTitle:
+                          "Please check your internet connection or try restarting the application",
+                      icon: Icons.error,
+                      isRefresh: true,
+                      onRefresh: () {
+                        BlocProvider.of<CurrentWeatherBloc>(context)
+                            .add(FetchCurrentWeatherCondition(widget.location));
+                      });
                 }
                 return const Center(
                   child: CircularProgressIndicator(color: Colors.black),
