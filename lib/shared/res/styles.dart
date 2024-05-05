@@ -8,5 +8,15 @@ class AppStyles {
   static TextStyle errorSubTitleStyle(context) => TextStyle(
       color: Colors.black54, fontSize: appSize(context: context, unit: 3)/9.5);
 
+  static TextStyle weatherTitleStyle(context) => TextStyle(
+      color: Colors.white, fontSize: appSize(context: context, unit: 3)/9.5);
+
+  static TextStyle weatherValueStyle(context) => TextStyle(
+    fontWeight: FontWeight.bold,
+      color: Colors.white, fontSize: appSize(context: context, unit: 3)/7);
+
+
+
+
 
 }

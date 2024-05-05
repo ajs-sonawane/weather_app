@@ -25,8 +25,9 @@ class AppAlertWidget extends StatelessWidget {
         width: appSize(context: context, unit: 18),
         padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 22),
         decoration: BoxDecoration(
+          color: Colors.white38,
             borderRadius: BorderRadius.circular(44),
-            border: Border.all(color: Colors.red)),
+            border: Border.all(color: Colors.white,width: 2)),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
