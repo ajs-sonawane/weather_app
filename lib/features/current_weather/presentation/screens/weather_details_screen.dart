@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/features/current_weather/presentation/bloc/cw_blocs.dart';
 import 'package:weather_app/features/current_weather/presentation/bloc/cw_events.dart';
@@ -58,6 +59,24 @@ class _WeatherDetailsScreenState extends State<WeatherDetailsScreen> {
                               fit: BoxFit.fill)),
                     ],
                   ),
+                  Positioned(
+                    top: 20,
+                    left: 0,
+                    right: 0,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        InkWell(
+                          onTap: () => Navigator.pop(context),
+                          child: Icon(Icons.close_rounded,
+                              color: Colors.white,
+                              size:
+                                  appSize(context: context, unit: 3) / 3 - 10),
+                        ),
+                        const SizedBox(width: 12)
+                      ],
+                    ),
+                  ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -114,8 +133,11 @@ class _WeatherDetailsScreenState extends State<WeatherDetailsScreen> {
                                     Border.all(color: Colors.white, width: 2)),
                             child: Row(
                               children: [
-                                _weatherMeasureContainer("Weather Condition",
-                                    "${state.resp?.current?.condition?.text}"),
+                                Expanded(
+                                  child: _weatherMeasureContainer(
+                                      "Weather Condition",
+                                      "${state.resp?.current?.condition?.text}"),
+                                ),
                                 CircleAvatar(
                                   radius:
                                       appSize(context: context, unit: 2) / 2.5,
@@ -212,13 +234,17 @@ class _WeatherDetailsScreenState extends State<WeatherDetailsScreen> {
     );
   }
 
-  _weatherMeasureContainer(title, value) {
+  Widget _weatherMeasureContainer(title, value) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 22),
       child: Column(
         children: [
-          Text(value, style: AppStyles.weatherValueStyle(context)),
-          Text(title, style: AppStyles.weatherTitleStyle(context)),
+          Text(value,
+              textAlign: TextAlign.center,
+              style: AppStyles.weatherValueStyle(context)),
+          Text(title,
+              textAlign: TextAlign.center,
+              style: AppStyles.weatherTitleStyle(context)),
         ],
       ),
     );
@@ -244,6 +270,9 @@ class _WeatherDetailsScreenState extends State<WeatherDetailsScreen> {
       case "cloudy":
         return kCloudyImg;
       default:
+        if (value.contains("rain")) {
+          return kRainImg;
+        }
         return kClearImg;
     }
   }
