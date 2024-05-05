@@ -12,3 +12,4 @@ const String kClearImg = "$kAssetsDirectory/images/clear.png";
 const String kCloudyImg = "$kAssetsDirectory/images/cloudy.webp";
 const String kMistImg = "$kAssetsDirectory/images/mist.jpg";
 const String kRainImg = "$kAssetsDirectory/images/rain.gif";
+const String kSunnyImg = "$kAssetsDirectory/images/sunny.jpg";

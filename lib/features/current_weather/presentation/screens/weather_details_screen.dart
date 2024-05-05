@@ -270,9 +270,16 @@ class _WeatherDetailsScreenState extends State<WeatherDetailsScreen> {
       case "cloudy":
         return kCloudyImg;
       default:
-        if (value.contains("rain")) {
+        if (value.toLowerCase().contains("rain")) {
           return kRainImg;
         }
+        if (value.toLowerCase().contains("sun")) {
+          return kSunnyImg;
+        }
+        if (value.toLowerCase().contains("snow")) {
+          return kSnowImg;
+        }
+
         return kClearImg;
     }
   }

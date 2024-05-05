@@ -74,6 +74,9 @@ class _InputActionCardWidgetState extends State<InputActionCardWidget> {
             title: "Get Weather Conditions",
             color: Colors.brown,
             onPressed: () {
+              if (FocusScope.of(context).hasFocus){
+                FocusScope.of(context).unfocus();
+              }
               if (searchController.text.isNotEmpty) {
                 Navigator.of(context).push(goToRoute(
                     WeatherDetailsScreen(location: searchController.text)));
